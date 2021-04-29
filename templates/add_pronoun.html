@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+<style>
+    {% block style %}
+    #content {
+        display: flex;
+        justify-content: center;
+    }
+    #content > form {
+        background: lavender;
+        padding: 1rem;
+        display: inline-block;
+        border-radius: .5rem;
+        margin-top: 1rem;
+        width: max(min(20rem, 100vw), 50vw);
+    }
+    label {
+        font-size: 1.25rem;
+        font-family: Roboto, sans-serif;
+    }
+    input {
+        font-size: 1.25rem;
+        width: calc(max(min(20rem, 100vw), 50vw) - 1rem);
+    }
+    #content>form>button {
+        font-size: 1.25rem;
+        width: calc(max(min(20rem,100vw),50vw) - .5rem);
+        border: black solid 1px;
+        margin-top: 1.25rem;
+        background: lightblue;
+        font-family: Roboto, sans-serif;
+    }
+    {% endblock %}
+</style>
+{% block content %}
+<form action="/pronouns" method="post">
+    <label for="subject">Subject Pronoun</label><br />
+    <input name="subject" id="subject" /><br />
+    <label for="object">Object Pronoun</label><br />
+    <input name="object" id="object" /><br />
+    <label for="possessive_determiner">Possessive Determiner</label><br />
+    <input name="possessive_determiner" id="possessive_determiner" /><br />
+    <label for="possessive_pronoun">Possessive Pronoun</label><br />
+    <input name="possessive_pronoun" id="possessive_pronoun" /><br />
+    <label for="reflexive">Reflexive Pronoun</label><br />
+    <input name="reflexive" id="reflexive" /><br />
+    <button>Submit</button>
+</form>
+{% endblock %}

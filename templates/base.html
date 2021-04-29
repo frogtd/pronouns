@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}{{ title }} - Pronouns{% endblock %}</title>
+        {% block head %}{% endblock %}
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <link
+            rel="preload"
+            href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Code+Pro:wght@300;400&display=swap"
+            as="style"
+            onload="this.onload=null;this.rel='stylesheet'"
+        />
+        <noscript>
+            <link
+                href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&family=Source+Code+Pro:wght@300;400&display=swap"
+                rel="stylesheet"
+            />
+        </noscript>
+        <style>
+            {% block style %}{% endblock %}
+            body {
+                margin: 0
+            }
+            nav {
+                background-color: lightblue;
+                display: flex;
+                padding: 0 .5rem;
+            }
+            nav > a, nav > a:visited  {
+                color: black;
+                font-size: 1.5rem;
+                text-decoration: none;
+
+            }
+            nav > .left, nav > .right {
+                margin-top: auto;
+                display: inline;
+            }
+            nav > .left > a:visited {
+                color: black;
+            }
+            nav > .left > a {
+                color: black;
+                font-family: "Source Code Pro", monospace;
+                display: inline-block;
+                font-weight: 300;
+                text-decoration: none;
+                text-align: left;
+                font-size: 1.2rem;
+            }
+            nav > .left > a::first-letter {
+                font-size: 2rem;
+                font-weight: 400;
+            }
+            .right {
+                text-align: right;
+                flex-grow: 1;
+            }
+            .right > a:visited {
+                color: black;
+            }
+            .right > a {
+                color: black;
+                text-decoration: none;
+                padding: 0.25rem;
+                font-family: Roboto, sans-serif;
+                font-weight: 300;
+            }
+            nav > .right > form {
+                display: inline;
+            }
+            nav > .left > button {
+                display: none;
+
+            }
+            {% if id == "" %}
+            {% else %}
+            nav > .right > form > button {
+                border: 0;
+                background: none;
+                font-family: Roboto,sans-serif;
+                font-size: 1rem;
+                font-weight: 300;
+            }
+            {% endif %}
+            @media only screen and (max-width: 700px) {
+                nav {
+                    display: block;
+                    height: 2.2rem;
+
+                }
+                nav > .right {
+                    flex-direction: column;
+                    display: flex;
+                }
+                nav > .left > button {
+                    display: inline;
+                    flex-grow: 1;
+                    text-align: right;
+                    border: 0;
+                    background: none;
+                    font-family: Roboto, sans-serif;
+                    font-size: 1.25rem;
+                    font-weight: 300;
+                }
+                nav > .left {
+                    display: flex;
+                    width: 100%;
+                }
+            }
+        </style>
+        <script>
+            open_box = () => {
+                a = document.querySelector("nav");
+                if (a.style.height == "") {
+                    a.style.height = "auto";
+                } else {
+                    a.style.height = "";
+                }
+            };
+        </script>
+    </head>
+    <body>
+        <nav style="overflow: hidden">
+            <div class="left">
+                <a href="/">Pronouns</a>
+                <button onclick="open_box()">Links</button>
+            </div>
+            <main class="right">
+                <a href="/list">Pronouns List</a>
+                <a href="/add">Add pronouns</a>
+                {% if id == "" %}
+                <a href="/register">Register</a>
+                <a href="/login">Login</a>
+                {% else %}
+                <a href="/me">Profile</a>
+                <form class="logout" action="/logout" method="post"><button>Logout</button></form>
+                {% endif %}
+            </main>
+        </nav>
+        <div id="content">{% block content %}{% endblock %}</div>
+    </body>
+</html>

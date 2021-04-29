@@ -1,0 +1,61 @@
+{% extends "base.html" %} 
+<style>
+    {% block style %}
+    .pronouns > div {
+        font-family: Roboto, sans-serif;
+        font-weight: 300;
+        padding: .5rem .25rem;
+        margin: .25rem;
+        border: black solid 1px;
+        border-radius: .5rem;
+    }
+    .pronouns:hover {
+        text-decoration: underline;
+    }
+    .pronouns:visited, .pronouns {
+        text-decoration: none;
+        color: black
+    }
+    .nav {
+        display: flex;
+        justify-content: space-between;
+    }
+    .nav > a {
+        text-decoration: none;
+        color: black;
+        text-align: center;
+        width: 5rem;
+        background-color: lavender;
+        margin: 0.25rem;
+        padding: 0.25rem;
+        border-radius: 0.5rem;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 300;
+    }
+    a.disabled {
+        text-decoration: line-through;
+    }
+    {% endblock %}
+</style>
+{% block content %}
+{% for pronoun in pronouns %}
+<a class="pronouns" href="/pronouns/{{ pronoun.id }}">
+    <div class="">
+        {{ pronoun.subject }}/{{ pronoun.object }}/{{ pronoun.possessive_determiner }}/{{
+        pronoun.possessive_pronoun }}/{{ pronoun.reflexive }}
+    </div>
+</a>
+{% endfor %}
+<div class="nav">
+    {% if page > 1 %}
+    <a class="prev" href="/list/{{ page - 1 }}">Previous</a>
+    {% else %}
+    <a class="prev disabled">Previous</a>
+    {% endif %}
+    {% if !next_exists %}
+    <a class="next" href="/list/{{ page + 1 }}">Next</a>
+    {% else %}
+    <a class="next disabled">Next</a>
+    {% endif %}
+</div>
+{% endblock %}

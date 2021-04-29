@@ -1,0 +1,47 @@
+{% extends "base.html" %} {% block title %}Pronouns{% endblock %} {% block head %}
+<meta
+    name="description"
+    content="Pronouns are a part of language used to refer to someone or something without using proper nouns. This site allows you to show your pronouns."
+/>
+{% endblock %}
+<style>
+    {% block style %}
+    .pronouns {
+        font-family: Roboto, sans-serif;
+        font-weight: 300;
+        padding: .5rem .25rem;
+        margin: .25rem;
+        border: black solid 1px;
+        border-radius: .5rem;
+    }
+    #content > a:hover {
+        text-decoration: underline;
+    }
+    #content > a:visited, #content > a{
+        text-decoration: none;
+        color: black
+    }
+    h2 {
+        font-family: "Source Code Pro", monospace;
+        font-weight: 300;
+        background-color: lavender;
+        padding: 0.25rem;
+        margin: 0.25rem;
+        border-radius: 0.5rem;
+    }
+    {% endblock %}
+</style>
+
+{% block content %}
+
+<h2>Examples:</h2>
+{% for pronoun in examples %}
+<a href="/pronouns/{{ pronoun.id }}">
+    <div class="pronouns">
+        {{ pronoun.subject }}/{{ pronoun.object }}/{{ pronoun.possessive_determiner }}/{{
+        pronoun.possessive_pronoun }}/{{ pronoun.reflexive }}
+    </div>
+</a>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+<style>
+    {% block style %}
+    #content {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    #content > form {
+        background: lavender;
+        padding: 1rem;
+        display: inline-block;
+        border-radius: .5rem;
+        margin-top: 1rem;
+        width: max(min(20rem, 100vw), 50vw);
+    }
+    label {
+        font-size: 1.25rem;
+        font-family: Roboto, sans-serif;
+    }
+    input {
+        font-size: 1.25rem;
+        width: calc(max(min(20rem, 100vw), 50vw) - 1rem);
+        font-family: "Source Code Pro", monospace;
+    }
+    #content>form>button {
+        font-size: 1.25rem;
+        width: calc(max(min(20rem,100vw),50vw) - .5rem);
+        border: black solid 1px;
+        margin-top: 1.25rem;
+        background: lightblue;
+        font-family: Roboto, sans-serif;
+    }
+    {% if error.is_some() %}
+    .error {
+        background-color: pink;
+        width: max(min(20rem, 100vw), 50vw);
+        font-family: "Source Code Pro", monospace;
+        margin-top: 1rem;
+        padding: 1rem;
+        border-radius: 0.25rem;
+    }
+    {% endif %}
+    {% endblock %}
+</style>
+{% block content %}
+{% if error.is_some() %}
+<h2 class="error">{{ error.unwrap() }}</h2>
+{% endif %}
+<form action="/login" method="post">
+    <label for="username">Username</label><br />
+    <input name="username" id="username" autocomplete="username" /><br />
+    <label for="password">Password</label><br />
+    <input type="password" name="password" id="password" autocomplete="current-password" /><br />
+    <button>Submit</button>
+</form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+<style>
+    {% block style %}
+    a,h2 {
+        font-family: "Roboto", sans-serif;
+        font-weight: 300;
+        text-align: center;
+        border-radius: 0.5rem;
+    }
+    {% endblock %}
+</style>
+{% block content %}
+<h2>The pronouns have been added to your profile!</h2>
+<a href="/me"><h2>Go see!</h2></a>
+{% endblock %}

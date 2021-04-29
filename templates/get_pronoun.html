@@ -1,0 +1,129 @@
+{% extends "base.html" %} {% block head %}
+<meta
+    name="description"
+    content="{{ pronoun.subject }}/{{ pronoun.object }}/{{ pronoun.possessive_determiner }}/{{ pronoun.possessive_pronoun }}/{{ pronoun.reflexive }} pronouns, with example usage."
+/>
+{% endblock %}
+
+<style>
+    {% block style %}
+    .pronoun_text > p {
+        font-family: Roboto, sans-serif;
+        font-weight: 300;
+        padding: 0.5rem 0.5rem;
+        margin: 0.25rem;
+        border: #000 solid 1px;
+        border-radius: 0.5rem;
+        line-height: 1.5rem;
+    }
+
+    h1,
+    h2 {
+        font-family: "Source Code Pro", monospace;
+        font-weight: 300;
+        background-color: lavender;
+        padding: 0.25rem;
+        margin: 0.25rem;
+        border-radius: 0.5rem;
+    }
+
+    .example,
+    .pronouns {
+        flex: 1 1;
+        min-width: min(calc(100vw - .5rem), 500px);
+    }
+
+    .example_text {
+        font-family: Roboto, sans-serif;
+        font-weight: 300;
+        padding: 0.5rem 0.25rem;
+        margin: 0.25rem;
+        border: #000 solid 1px;
+        border-radius: 0.5rem;
+    }
+
+    .pronoun_text > p > span {
+        color: #4141ff;
+    }
+
+    article {
+        display: flex;
+        flex-flow: row wrap;
+    }
+    .add {
+        border: 0;
+        background-color: lavender;
+        width: calc(100% - 2rem);
+        margin: 1rem;
+        font-family: "Source Code Pro", monospace;
+        font-size: 3rem;
+        padding: 0.5rem 0;
+        border-radius: 0.5rem;
+
+    }
+
+    {% if id == "" %} 
+    a.add {
+        text-align: center;
+        display: block;
+        text-decoration: none;
+        color: black;
+    }
+    a.add:hover {
+        color: black;
+    }
+    {% endif %}
+    {% endblock %}
+</style>
+
+{% block content %}
+<header>
+    <h1>
+        {{ pronoun.subject }}/<wbr />{{ pronoun.object }}/<wbr />{{ pronoun.possessive_determiner
+        }}/<wbr />{{ pronoun.possessive_pronoun }}/<wbr />{{ pronoun.reflexive }}
+    </h1>
+</header>
+<article>
+    <div class="pronouns">
+        <h2>Pronouns:</h2>
+        <div class="pronoun_text">
+            <p>Subject pronoun: <span>{{ pronoun.subject }}</span></p>
+            <p>Object pronoun: <span>{{ pronoun.object }}</span></p>
+            <p>
+                Possessive determiner:
+                <span>{{ pronoun.possessive_determiner }}</span>
+            </p>
+            <p>Possessive pronoun: <span>{{ pronoun.possessive_pronoun }}</span></p>
+            <p>Reflexive pronoun: <span>{{ pronoun.reflexive }}</span></p>
+        </div>
+    </div>
+    <div class="example">
+        <h2>Example:</h2>
+        <div class="example_text">
+            Today, <span class="pronoun">{{ pronoun.subject }}</span> went to the bank to look for
+            <span class="pronoun">{{ pronoun.possessive_determiner }}</span> car, as it is
+            <span class="pronoun">{{ pronoun.possessive_pronoun }}</span>.<br />
+            I brought <span class="pronoun">{{ pronoun.object }}</span> there and
+            <span class="pronoun">{{ pronoun.subject }}</span> drove back
+            <span class="pronoun">{{ pronoun.reflexive }}</span>.<br />
+        </div>
+    </div>
+
+    
+</article>
+{% if id != "" %} 
+<form method="post">
+    {% if has_pronoun %}
+    <input type="hidden" id="action" name="action" value="remove">
+    <button type="submit" class="add">Remove</button>
+    {% else %}
+    <input type="hidden" id="action" name="action" value="add">
+    <button type="submit" class="add">Add</button>
+    {% endif %}
+    <!-- TODO: add remove button if you already have it -->
+</form>
+{% else %}
+<a class="add" href="/login">Login to add!</a>
+{% endif %}
+
+{% endblock %}
